@@ -1,0 +1,40 @@
+global:
+  scrape_interval: 1m
+  scrape_timeout: 25s
+  evaluation_interval: 1m
+  external_labels:
+    prometheus: federation
+
+
+scrape_configs:
+  - job_name: prometheus
+    static_configs:
+      - targets: ["localhost:9090"]
+        labels:
+          grupo: "Prometheus"
+
+  - job_name: 'federate'
+    honor_labels: true
+    metrics_path: '/federate'
+    params:
+      'match[]':
+        - '{job="prometheus"}'
+        - '{job="kubernetes-apiservers"}'
+        - '{job="kubernetes-nodes-cadvisor"}'
+        - '{job="kubernetes-service-endpoints"}'
+        - '{job="kubernetes-service-endpoints-slow"}'
+        - '{job="prometheus-pushgateway"}'
+        - '{job="kubernetes-services"}'
+        - '{job="kubernetes-pods"}'
+        - '{job="kubernetes-pods-slow"}'
+        - '{job="kubernetes-nodes"}'
+        - '{__name__=~"job:.*"}'
+    static_configs:
+      - targets:
+        - 'prometheus-dev.test.com.br'
+        labels:
+          cluster: k8s-DEV
+
+
+  
+
