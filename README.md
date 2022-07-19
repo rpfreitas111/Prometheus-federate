@@ -153,3 +153,12 @@ As configurações da variáveis foram passadas de forma raw com EOT, os parâme
   ]
 }
 ```
+## Imagems da ferrramenta
+- A lista do dashboard abaixo trás a opção de selecionar qual cluster quero visualizar as métricas.
+![lista de cluster](./picture/lista-clusters.png)
+
+- Abaixo está o prometheus conectado a outro prometheus por meio do recurso federation
+![Targets prometheus](./picture/target-prometheus.png)
+
+- Nesta opção tenho a possibilidade de ter uma visão geral de todos os meus cluster e caso algum  tenha erro posso ser alertado, com isto tenho um grande ganho de tempo pois posso me concentrar em um único local e olhar todos os erros de todos os cluster.
+![Lista de erros](./picture/list-erros-por-cluster.png)
